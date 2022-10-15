@@ -50,13 +50,9 @@ export const taskListSlice = createSlice({
 
       state.value = payload;
     },
-    update: (state, param) => {
-      const { payload } = param;
-      state.value = payload;
-    },
   },
 });
-const { actions, reducer } = taskListSlice;
-export const { save, clear, done, remove, doneDelete, update, edit } =
+
+export const { save, clear, done, remove, doneDelete, edit } =
   taskListSlice.actions;
 export default taskListSlice.reducer;

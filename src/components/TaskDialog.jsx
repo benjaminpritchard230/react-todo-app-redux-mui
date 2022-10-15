@@ -7,11 +7,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { v4 as uuidv4 } from "uuid";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { save } from "../features/taskList/taskListSlice";
 
 export default function TaskDialog({ taskDialog, setTaskDialog }) {
-  const taskList = useSelector((state) => state.taskList.value);
   const dispatch = useDispatch();
   const id = uuidv4();
   const date = new Date().toISOString().slice(0, 10);

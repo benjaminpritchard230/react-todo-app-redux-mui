@@ -8,19 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  save,
-  clear,
-  doneDelete,
-  update,
-} from "../features/taskList/taskListSlice";
-import { useState, useEffect } from "react";
+import { save, clear, doneDelete } from "../features/taskList/taskListSlice";
 import { v4 as uuidv4 } from "uuid";
 
 export default function TopAppBar({ theme, setTheme }) {
   const taskList = useSelector((state) => state.taskList.value);
   const dispatch = useDispatch();
-  const [filteredList, setFilteredList] = useState([]);
   const id = uuidv4();
 
   function randomString(length) {

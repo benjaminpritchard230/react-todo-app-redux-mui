@@ -1,29 +1,18 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import FloatingActionButtons from "./components/FloatingActionButtons";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import TaskCard from "./components/TaskCard";
 import TaskDialog from "./components/TaskDialog";
 import TopAppBar from "./components/TopAppBar";
-import { styled } from "@mui/material/styles";
 import FilterDialog from "./components/FilterDialog";
 
 function App() {
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-
   const taskList = useSelector((state) => state.taskList.value);
-  const dispatch = useDispatch();
 
   const [theme, setTheme] = useState("light");
   const [taskDialog, setTaskDialog] = useState(false);
@@ -48,18 +37,14 @@ function App() {
   });
 
   const displayFilteredTaskCards = () => {
-    let cardsArray = [];
-    filteredTaskList.forEach((task, index) => {
-      cardsArray.push(
-        <TaskCard
-          task={task}
-          key={task.id}
-          editDialog={editDialog}
-          setEditDialog={setEditDialog}
-        />
-      );
-    });
-    return cardsArray;
+    return filteredTaskList.map((task) => (
+      <TaskCard
+        task={task}
+        key={task.id}
+        editDialog={editDialog}
+        setEditDialog={setEditDialog}
+      />
+    ));
   };
 
   useEffect(() => {
@@ -70,7 +55,6 @@ function App() {
     const filtered = taskList.filter((task) => {
       return task.name.toLowerCase().includes(filterText.toLowerCase());
     });
-    // console.log(filtered);
     setFilteredTaskList(filtered);
   }, [filterText, taskList]);
 

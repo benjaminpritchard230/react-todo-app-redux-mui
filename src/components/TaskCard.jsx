@@ -9,7 +9,7 @@ import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import TaskCardButtons from "./TaskCardButtons";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import TextField from "@mui/material/TextField";
 import { edit } from "../features/taskList/taskListSlice";
 
@@ -28,14 +28,12 @@ export default function TaskCard({ task, editDialog, setEditDialog }) {
   };
 
   const [editBox, setEditBox] = useState(false);
-  const taskList = useSelector((state) => state.taskList.value);
   const dispatch = useDispatch();
 
   const [editText, setEditText] = useState("");
 
   useEffect(() => {
     console.log(editText);
-    console.log(task.name);
   }, [editText]);
 
   const handleSubmit = (e) => {
@@ -73,7 +71,6 @@ export default function TaskCard({ task, editDialog, setEditDialog }) {
           </CardContent>
 
           <CardActions style={style}>
-            {" "}
             <TaskCardButtons
               key={task.id}
               task={task}

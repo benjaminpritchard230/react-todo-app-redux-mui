@@ -4,6 +4,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+import Tooltip from "@mui/material/Tooltip";
 export default function FloatingActionButtons({
   taskDialog,
   setTaskDialog,
@@ -23,36 +24,40 @@ export default function FloatingActionButtons({
 
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }} style={style}>
-      <Fab
-        color="primary"
-        aria-label="add"
-        onClick={() => {
-          setTaskDialog(!taskDialog);
-        }}
-      >
-        <AddIcon />
-      </Fab>
-      {filterText.length === 0 ? (
+      <Tooltip title="Add task">
         <Fab
-          aria-label="filter"
+          color="primary"
+          aria-label="add"
           onClick={() => {
-            setFilterDialog(true);
-            console.log("clicked");
+            setTaskDialog(!taskDialog);
           }}
         >
-          <FilterAltIcon />
+          <AddIcon />
         </Fab>
-      ) : (
-        <Fab
-          aria-label="clear-filter"
-          onClick={() => {
-            setFilterText("");
-            console.log("clicked");
-          }}
-        >
-          <FilterAltOffIcon />
-        </Fab>
-      )}
+      </Tooltip>
+      <Tooltip title="Filter tasks">
+        {filterText.length === 0 ? (
+          <Fab
+            aria-label="filter"
+            onClick={() => {
+              setFilterDialog(true);
+              console.log("clicked");
+            }}
+          >
+            <FilterAltIcon />
+          </Fab>
+        ) : (
+          <Fab
+            aria-label="clear-filter"
+            onClick={() => {
+              setFilterText("");
+              console.log("clicked");
+            }}
+          >
+            <FilterAltOffIcon />
+          </Fab>
+        )}
+      </Tooltip>
     </Box>
   );
 }

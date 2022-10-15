@@ -5,17 +5,10 @@ import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { done, remove } from "../features/taskList/taskListSlice";
-const TaskCardButtons = ({
-  task,
-
-  editText,
-  setEditText,
-  editBox,
-  setEditBox,
-}) => {
-  const taskList = useSelector((state) => state.taskList.value);
+import Tooltip from "@mui/material/Tooltip";
+const TaskCardButtons = ({ task, editBox, setEditBox }) => {
   const dispatch = useDispatch();
 
   const handleDoneClick = () => {
@@ -33,36 +26,39 @@ const TaskCardButtons = ({
       alignItems="center"
       spacing={1}
     >
-      <IconButton
-        onClick={() => {
-          handleDoneClick();
-        }}
-      >
-        <Avatar>
-          <DoneIcon
-            color={task.done ? "success" : "default"}
-            // sx={{ "&:hover": { color: "green" } }}
-          />
-        </Avatar>
-      </IconButton>
-      <IconButton
-        onClick={() => {
-          setEditBox(!editBox);
-        }}
-      >
-        <Avatar>
-          <EditIcon sx={{ "&:hover": { color: "yellow" } }} />
-        </Avatar>
-      </IconButton>
-      <IconButton
-        onClick={() => {
-          handleDeleteClick();
-        }}
-      >
-        <Avatar>
-          <DeleteIcon sx={{ "&:hover": { color: "red" } }} />
-        </Avatar>
-      </IconButton>
+      <Tooltip title="Done" placement="top">
+        <IconButton
+          onClick={() => {
+            handleDoneClick();
+          }}
+        >
+          <Avatar>
+            <DoneIcon color={task.done ? "success" : "default"} />
+          </Avatar>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Edit title" placement="top">
+        <IconButton
+          onClick={() => {
+            setEditBox(!editBox);
+          }}
+        >
+          <Avatar>
+            <EditIcon sx={{ "&:hover": { color: "yellow" } }} />
+          </Avatar>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Delete" placement="top">
+        <IconButton
+          onClick={() => {
+            handleDeleteClick();
+          }}
+        >
+          <Avatar>
+            <DeleteIcon sx={{ "&:hover": { color: "red" } }} />
+          </Avatar>
+        </IconButton>
+      </Tooltip>
     </Stack>
   );
 };
